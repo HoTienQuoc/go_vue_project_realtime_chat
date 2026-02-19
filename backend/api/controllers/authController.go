@@ -17,8 +17,8 @@ import (
 // @Summary Register a new user
 // @Description Register a new user by providing email, password, first name, last name
 // @Tags Authentication
-// @Accept JSON
-// @Produce JSON
+// @Accept json
+// @Produce json
 // @Param user body models.CreateUser true "user register details"
 // @Success 201 {object} models.UserModel
 // @Failure 400 {object} map[string]interface{}
@@ -85,8 +85,8 @@ func Register(c fiber.Ctx) error {
 // @Summary Login a user
 // @Description Login a new user by providing email, password, first name, last name
 // @Tags Authentication
-// @Accept JSON
-// @Produce JSON
+// @Accept json
+// @Produce json
 // @Param user body models.LoginUser true "user login details"
 // @Success 201 {object} models.UserModel
 // @Failure 400 {object} map[string]interface{}

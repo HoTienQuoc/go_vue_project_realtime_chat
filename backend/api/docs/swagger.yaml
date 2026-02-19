@@ -1,4 +1,145 @@
+definitions:
+  models.CreateUser:
+    properties:
+      email:
+        type: string
+      firstName:
+        type: string
+      lastName:
+        type: string
+      password:
+        type: string
+    type: object
+  models.LoginUser:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    type: object
+  models.UserModel:
+    properties:
+      _id:
+        type: string
+      bio:
+        type: string
+      email:
+        type: string
+      followers:
+        items:
+          type: string
+        type: array
+      following:
+        items:
+          type: string
+        type: array
+      imageUrl:
+        type: string
+      name:
+        type: string
+      password:
+        minLength: 5
+        type: string
+    required:
+    - email
+    - password
+    type: object
+host: localhost:5000
 info:
   contact: {}
-paths: {}
+  description: This is Swagger docs for rest api golang fiber
+  title: Fiber Golang Mongo GRPC WEBSOCKET etc...
+  version: "1.0"
+paths:
+  /user/Update/{id}:
+    patch:
+      consumes:
+      - application/json
+      description: Update User Details
+      parameters:
+      - description: User Id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.UserModel'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Update User
+      tags:
+      - Users
+  /user/getUser/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Get User By Id a new user by providing email, password, first name,
+        last name
+      parameters:
+      - description: User Id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.UserModel'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Get User By Id
+      tags:
+      - Users
+  /user/signup:
+    post:
+      consumes:
+      - application/json
+      description: Login a new user by providing email, password, first name, last
+        name
+      parameters:
+      - description: user login details
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/models.LoginUser'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.UserModel'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Login a user
+      tags:
+      - Authentication
+schemes:
+- http
+securityDefinitions:
+  BearerAuth:
+    description: Type "Bearer" followed by a space and the token
+    in: header
+    name: Authorization
+    type: apiKey
 swagger: "2.0"

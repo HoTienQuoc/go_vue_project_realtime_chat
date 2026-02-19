@@ -26,3 +26,10 @@ type LoginUser struct {
 	Email    string
 	Password string
 }
+
+// interface
+type UpdateUser struct {
+	Name     string
+	ImageUrl string
+	Bio      string
+}

@@ -43,7 +43,8 @@ func main() {
 	})
 
 	// Setup routes
-	routes.SetupRoutes(app)
+	routes.SetupAuthRoutes(app)
+	routes.SetupUserRoutes(app)
 
 	// Mount the UI with the default configuration under /swagger
 	app.Get("/swagger/*", swaggo.HandlerDefault)

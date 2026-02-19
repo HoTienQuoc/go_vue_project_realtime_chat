@@ -2,8 +2,7 @@
 
 clear-swag:
 	@echo "Clearing docs directory"
-	del /Q docs\* 2>null || exit 0
-
+	rm -rf docs/* || true
 
 swag-init: clear-swag
 	@echo "Generate swagger docs"
